@@ -94,11 +94,14 @@ public final class RangeHandler implements GmeCommandEventListener {
         boolean isAlone = false;
 
         if (range > RangeHandler.WORLD_RANGE) {
-            isAlone = getNearbyPlayers(player, range).size() == 0;
+            isAlone = config.getBoolean("cancel.no-nearby", true)
+                    && (getNearbyPlayers(player, range).size() == 0);
         } else if (range == RangeHandler.WORLD_RANGE) {
-            isAlone = player.getWorld().getPlayers().size() <= 1;
+            isAlone = config.getBoolean("config.if-alone-in-world", true)
+                    && (player.getWorld().getPlayers().size() <= 1);
         } else {
-            isAlone = Bukkit.getOnlinePlayers().size() <= 1;
+            isAlone = config.getBoolean("config.if-alone-on-server", true)
+                    && (Bukkit.getOnlinePlayers().size() <= 1);
         }
 
         return isAlone;
@@ -110,6 +113,8 @@ public final class RangeHandler implements GmeCommandEventListener {
 
         return getOnlinePlayers().parallelStream()
             .filter(onlinePlayer -> {
+                if (!player.getWorld().getName().equals(onlinePlayer.getWorld().getName()))
+                    return false;
                 return onlinePlayer.getLocation().distance(player.getLocation()) <= range
                     && !player.getName().equals(onlinePlayer.getName());
             })

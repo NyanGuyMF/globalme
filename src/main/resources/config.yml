@@ -19,9 +19,12 @@ format:
   broadcast: '&c* [BROADCAST] Developer &8» &c{message}'
 
 cancel:
-  # cancel if there are no players on server/world
-  # (calls if range set lower than 0)
+  # cancel if there are no players on server
+  # (calls if range set lower than -1)
   if-alone-on-server: true
+  # cancel if there are no players in world of command sender
+  # (calls if range set lower than -1)
+  if-alone-in-world: true
   # cancel if there are no players near the command sender
   # (calls if range set more than -1)
   no-nearby: true
