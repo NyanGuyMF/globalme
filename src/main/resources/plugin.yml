@@ -1,0 +1,12 @@
+name: GlobalMe
+author: NyanGuyMF
+main: nyanguymf.bukkit.globalme.GlobalMePlugin
+version: ${project.version}
+
+commands:
+  gme:
+    usage: 'Usage: /gme «message»'
+  me:
+    usage: 'Usage: /me «message»'
+  gmereload:
+    permission: 'gmereload'

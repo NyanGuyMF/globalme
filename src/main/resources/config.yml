@@ -1,0 +1,39 @@
+# -2 — all worlds
+# -1 — all the world where player runs command
+# [0-9223372036854775807] — the distance from the player 
+
+# if not set it will be -1
+local-me-range: 300
+# if not set it will be -2
+global-me-range: -2
+
+parse-colors: true
+
+range:
+  local-me: 300
+  global-me: -2
+
+format:
+  me: '&3* {player-name} &8» &7{message}'
+  gme: '&b# {player-name} &8» &f{message}'
+  broadcast: '&c* [BROADCAST] Developer &8» &c{message}'
+
+cancel:
+  # cancel if there are no players on server/world
+  # (calls if range set lower than 0)
+  if-alone-on-server: true
+  # cancel if there are no players near the command sender
+  # (calls if range set more than -1)
+  no-nearby: true
+  # if it's true the console will cannot send messages, otherwise 
+  # it will broadcast for all online players (-2 range) with 'broadcast' format
+  if-console: false
+
+messages:
+  reloaded: '&3GlobalMe &8» &ePlugin configuration reloaded.'
+  forever-alone-server: '&eMessage wasn''t delivered:&c you''re alone on this server.'
+  # supports {world-name} placehodler
+  forever-alone-world: '&eMessage wasn''t delivered: &cyou''re alone in this world.'
+  # supports {range} placeholder
+  forever-alone-range: '&eMessage wasn''t delivered: &cthere are no nearby players.'
+  console-is-cancelled: '&cConsole cannot send messages.'
